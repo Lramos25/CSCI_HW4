@@ -1,0 +1,20 @@
+ Volume in drive C is Windows
+ Volume Serial Number is 1494-E2C8
+
+ Directory of C:\Users\luisr\CSC3916_HW3
+
+03/12/2022  09:42 AM    <DIR>          .
+03/12/2022  09:41 AM    <DIR>          ..
+03/12/2022  09:40 AM                57 .env
+03/12/2022  09:40 AM                55 .gitignore
+03/12/2022  09:40 AM               614 auth.js
+03/12/2022  09:40 AM               598 auth_jwt.js
+03/12/2022  09:40 AM             2,121 db.js
+03/12/2022  09:42 AM                 0 listoffiles.txt
+03/12/2022  09:40 AM            92,103 package-lock.json
+03/12/2022  09:40 AM               895 package.json
+03/12/2022  09:40 AM                20 Procfile
+03/12/2022  09:40 AM             2,682 README.md
+03/12/2022  09:40 AM             5,775 server.js
+              11 File(s)        104,920 bytes
+               2 Dir(s)  870,616,743,936 bytes free
