@@ -313,7 +313,7 @@ router.route('/reviews')
                                 if (err) {
                                     return res.status(403).json({success: false, message: "Unable to post review"});
                                 } else {
-                                    trackDimension(movie.genre, 'post/review', 'POST', review.rating, movie.title, '1');
+                                    //trackDimension(movie.genre, 'post/review', 'POST', review.rating, movie.title, '1');
 
                                     return res.status(200).json({success: true, message: "Review posted", movie: movie});
                                 }
