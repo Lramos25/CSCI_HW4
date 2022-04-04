@@ -7,9 +7,10 @@ const authJwtController = require('./auth_jwt');
 const jwt = require('jsonwebtoken');
 const User = require('./Users');
 const Movie = require("./Movies");
-const Review = require("./Review");
+const Review = require("./Reviews");
 
 const rp = require('request-promise');
+const mongoose = require("mongoose");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -65,6 +66,8 @@ function trackDimension(category, action, label, value, dimension, metric) {
 
     return rp(options);
 }
+
+//put code here for getting event to google analytics
 
 router.post('/signup', function (req, res)
 {
@@ -207,6 +210,27 @@ router.route('/movies')
 router.route('/movies/:title') //able to read the different dynamic segments within our component using the ":" with the segment we want
     .get(authJwtController.isAuthenticated, function (req, res)
     {
+        if (req.query && req.query.reviews && req.query.reviews === "true") {
+            Movie.findOne({title: req.params.title}, function (err, movie){
+                if (err) {
+                    return res.status(403).json({success: false, message: "Failed to get reviews"});
+                } else if (!movie) {
+                    return res.status(403).json({success: false, message: "failed to find movie"})
+                } else {
+                    Movie.aggregate()
+                        .match({_id: mongoose.Types.ObjectId(movie._id)})
+                        .lookup({from: 'reviews', localField: '_id', foreignField: 'movie_id', as: 'reviews'})
+                        .addFields({average_rating: {$avg: "$reviews.rating"}})
+                        .exec(function (err, mov) {
+                            if (err) {
+                                return res.status(403).json({success: false, message: "Movie not found"});
+                            } else {
+                                return res.status(200).json({success: true, message: "no reviews for movie yet", movie: mov});
+                            }
+                    })
+                }
+            })
+        }
         console.log(req.body);
         res = res.status(200);
 
@@ -313,7 +337,7 @@ router.route('/reviews')
                                 if (err) {
                                     return res.status(403).json({success: false, message: "Unable to post review"});
                                 } else {
-                                    trackDimension(movie.genre, 'post/review', 'POST', review.rating, movie.title, '1');
+                                    //trackDimension(movie.genre, 'post/review', 'POST', review.rating, movie.title, '1');
 
                                     return res.status(200).json({success: true, message: "Review posted", movie: movie});
                                 }
