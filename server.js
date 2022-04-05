@@ -246,7 +246,7 @@ router.route('/movies/:title') //able to read the different dynamic segments wit
     .get(authJwtController.isAuthenticated, function (req, res)
     {
         if (req.query && req.query.reviews && req.query.reviews === "true") {
-            Movie.find({title: req.params.title}) {
+           Movie.find(function(err, movies) {
                     console.log(movies);
                     if(err) {
                         return res.status(400).json({success: false, message: "No reviews found"});
