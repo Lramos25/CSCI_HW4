@@ -123,30 +123,64 @@ router.post('/signin', function (req, res)
 router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res)
     {
-        console.log(req.body);
-        res = res.status(200);
-        if (req.get('Content-Type'))
-        {
-            res = res.type(req.get('Content-Type'));
+        if (req.query && req.query.reviews && req.query.reviews === "true") {
+            Movie.find(function(err, movies) {
+                console.log(movies);
+                if(err) {
+                    return res.status(400).json({success: false, message: "No reviews found"});
+                } else if (!movies) {
+                    return res.status(400).json({success: false, message: "Provide movie title"})
+                } else {
+                    Movie.aggregate([
+                        {
+                            $lookup: {
+                                from: "Reviews",
+                                localField: "_id",
+                                foreignField: "movie_id",
+                                as: "movie_review"
+                            }
+                        },
+                        {
+                            $addFields: {
+                                avg_review: {$avg: "movie_review.rating"}
+                            }
+                            },
+                        {
+                            $sort: {avg_review : -1}
+                        }
+                    ])
+                        .exec(function (err, movie)
+                        {
+                            if (err)
+                            {
+                                return res.json(err);
+                            } else {
+                                return res.json({movie : movie});
+                            }
+                        })
+                }
+            }
+        )}
+        else {
+            console.log(req.body);
+            res = res.status(200);
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            Movie.find().exec(function (err, movies) {
+                if (err) {
+                    res.send(err);
+                }
+                if (movies.length < 1) {
+                    res.json({success: false, message: 'There are no movies available.'});
+                } else {
+                    res.json(movies);
+                }
+            })
         }
-        Movie.find().exec(function (err, movies)
-        {
-            if (err)
-            {
-                res.send(err);
-            }
-            if (movies.length < 1)
-            {
-                res.json({success: false, message: 'No movies found.'});
-            }
-            else
-            {
-                res.json(movies);
-            }
-        })
     })
 
-    .post(authJwtController.isAuthenticated, function (req, res) // genres idea form traversy media (youyube)
+    .post(authJwtController.isAuthenticated, function (req, res)
     {
         console.log(req.body);
         res = res.status(200);
@@ -204,49 +238,69 @@ router.route('/movies')
             });
         }
     })
+ 
 
 
-//idea from Ayan Tuladhar and https://javascript.plainenglish.io/using-nested-routes-in-react-22f9d3fbcf06
 router.route('/movies/:title') //able to read the different dynamic segments within our component using the ":" with the segment we want
+
     .get(authJwtController.isAuthenticated, function (req, res)
     {
         if (req.query && req.query.reviews && req.query.reviews === "true") {
-            Movie.findOne({title: req.params.title}, function (err, movie){
-                if (err) {
-                    return res.status(403).json({success: false, message: "Failed to get reviews"});
-                } else if (!movie) {
-                    return res.status(403).json({success: false, message: "failed to find movie"})
-                } else {
-                    Movie.aggregate()
-                        .match({_id: mongoose.Types.ObjectId(movie._id)})
-                        .lookup({from: 'reviews', localField: '_id', foreignField: 'movie_id', as: 'reviews'})
-                        .addFields({average_rating: {$avg: "$reviews.rating"}})
-                        .exec(function (err, mov) {
-                            if (err) {
-                                return res.status(403).json({success: false, message: "Movie not found"});
-                            } else {
-                                return res.status(200).json({success: true, message: "no reviews for movie yet", movie: mov});
+            Movie.find(function(err, movies) {
+                    console.log(movies);
+                    if(err) {
+                        return res.status(400).json({success: false, message: "No reviews found"});
+                    } else if (!movies) {
+                        return res.status(400).json({success: false, message: "Provide movie title"})
+                    } else {
+                        Movie.aggregate([
+                            {
+                                $lookup: {
+                                    from: "Reviews",
+                                    localField: "_id",
+                                    foreignField: "movie_id",
+                                    as: "movie_review"
+                                }
+                            },
+                            {
+                                $addFields: {
+                                    avg_review: {$avg: "movie_review.rating"}
+                                }
+                            },
+                            {
+                                $sort: {avg_review : -1}
                             }
-                    })
+                        ])
+                            .exec(function (err, movie)
+                            {
+                                if (err)
+                                {
+                                    return res.json(err);
+                                } else {
+                                    return res.json({movie : movie});
+                                }
+                            })
+                    }
                 }
+            )}
+        else
+        {
+            console.log(req.body);
+            res = res.status(200);
+
+            if (req.get('Content-Type')) {
+                res = res.type(req.get('Content-Type'));
+            }
+            Movie.find({title: req.params.title}).exec(function (err, movie) {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(movie);
             })
         }
-        console.log(req.body);
-        res = res.status(200);
-
-        if (req.get('Content-Type'))
-        {
-            res = res.type(req.get('Content-Type'));
-        }
-        Movie.find({title: req.params.title}).exec(function (err, movie)
-        {
-            if (err)
-            {
-                res.send(err);
-            }
-            res.json(movie);
-        })
     })
+
+
     .delete(authJwtController.isAuthenticated, function (req, res)
     {
         console.log(req.body);
@@ -356,4 +410,4 @@ router.route('/reviews')
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
 module.exports = app; // for testing only
- 
+
