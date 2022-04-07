@@ -262,14 +262,7 @@ router.route('/movies/:title') //able to read the different dynamic segments wit
                                     as: "movie_review"
                                 }
                             },
-                            {
-                                $addFields: {
-                                    avg_review: {$avg: "movie_review.rating"}
-                                }
-                            },
-                            {
-                                $sort: {avg_review : -1}
-                            }
+                           
                         ])
                             .exec(function (err, movie)
                             {
