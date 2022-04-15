@@ -1,5 +1,5 @@
 'use strict;';
-
+//Include crypto to generate the movie id
 var crypto = require('crypto');
 module.exports = function () {
     return {
@@ -11,9 +11,6 @@ module.exports = function () {
             return 1;
         },
 
-        /*
-         Retrieve
-         */
         find: function (id) {
             if (id) {
                 return this.userList.find(function (element) {
@@ -35,9 +32,6 @@ module.exports = function () {
             }
         },
 
-        /*
-         Delete
-         */
         remove: function (id) {
             var found = 0;
             this.userList = this.userList.filter(function (element) {
@@ -51,9 +45,6 @@ module.exports = function () {
             return found;
         },
 
-        /*
-         Update
-         */
         update: function (id, user) {
             var userIndex = this.userList.findIndex(function (element) {
                 return element.id === id;
