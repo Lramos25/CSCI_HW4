@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lramos25/CSC_3619HW2.git"
+    "url": "git+https://github.com/Lramos25/CSCI_HW4.git"
   },
   "keywords": [
     "Movie"
@@ -16,9 +16,9 @@
   "author": "Luis Ramos",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lramos25/CSC_3619HW2/issues"
+    "url": "https://github.com/Lramos25/CSCI_HW4/issues"
   },
-  "homepage": "https://github.com/Lramos25/CSC_3619HW2#readme",
+  "homepage": "https://github.com/Lramos25/CSCI_HW4#readme",
   "dependencies": {
     "auth": "^0.0.9",
     "auth0-js": "^9.19.0",
@@ -43,5 +43,8 @@
     "chai": "^4.3.0",
     "chai-http": "^4.3.0",
     "mocha": "^8.3.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
