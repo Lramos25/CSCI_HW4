@@ -1,12 +1,12 @@
 'use strict;';
-//Include crypto to generate the movie id
+
 var crypto = require('crypto');
 module.exports = function () {
     return {
         userList: [],
 
         save: function (user) {
-            user.id = crypto.randomBytes(20).toString('hex'); // fast enough for our purpose
+            user.id = crypto.randomBytes(20).toString('hex'); 
             this.userList.push(user);
             return 1;
         },
