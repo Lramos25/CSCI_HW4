@@ -6,16 +6,16 @@
 
 
 ## Sign Up Fail: Missing information ##
-
 ![SignUp FAIL _ provide all information](https://user-images.githubusercontent.com/10605443/163726854-8d07b2fe-0c64-420f-a8e9-6269469c6509.png)
 
 ## Sign Up Fail: User already exists ##
-
 ![SignUp FAIL _ user already created](https://user-images.githubusercontent.com/10605443/163726856-eceaba5d-5eea-4ff4-aa13-0c38e46020a1.png)
 
 ## Sign Up Works ##
-
 ![SignUp Works](https://user-images.githubusercontent.com/10605443/163726857-631f96a8-55de-4b6e-a919-0019a43cf77b.png)
+##  ##
+##  ##
+![Created user is in Mongo](https://user-images.githubusercontent.com/10605443/163727188-93d51690-e2d4-45a8-9a38-b0d7c2431934.png)
 
 ## Sign In Works ##
 
