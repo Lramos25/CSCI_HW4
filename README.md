@@ -55,6 +55,9 @@
 
 ![Review for movie is in Mongo](https://user-images.githubusercontent.com/10605443/163726848-965e9ccd-50d4-4795-816a-312a866c8a9e.png)
 
+## Reviews all get posted to MongoDB - 8 total reviews ##
+![All reviews ar in Mongo_8 total reviews](https://user-images.githubusercontent.com/10605443/163727287-a03444c8-87f0-4058-becd-1a1f34a6e2c2.png)
+
 
 
 ## Get one movie with reviews: Does not work correctly. Returns all movies and the reviews are blank ##
