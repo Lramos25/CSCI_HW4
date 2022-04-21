@@ -52,7 +52,8 @@
 ##  ##
 
 ## Exported Analytics ##
+[Exported report.pdf](https://github.com/Lramos25/CSCI_HW4/files/8526541/Exported.report.pdf)
 
 ## Screen Shot Analytics Home ##
-
+[These are 100% for this assignment.pdf](https://github.com/Lramos25/CSCI_HW4/files/8526542/These.are.100.for.this.assignment.pdf)
 
