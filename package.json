@@ -1,47 +1,46 @@
 {
-  "name": "csc3916_hw2",
+  "name": "csc3916_hw4",
   "version": "1.0.0",
-  "description": "Web API 3916 HW2",
+  "description": "Web API Homework 4",
   "main": "server.js",
   "scripts": {
     "test": "mocha --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lramos25/CSCI_HW4.git"
+    "url": "git+https://github.com/shawnmccarthy/CSC3916_HW3.git"
   },
   "keywords": [
     "Movie"
   ],
-  "author": "Luis Ramos",
+  "author": "Luis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Lramos25/CSCI_HW4/issues"
+    "url": "https://github.com/shawnmccarthy/CSC3916_HW3/issues"
   },
-  "homepage": "https://github.com/Lramos25/CSCI_HW4#readme",
+  "homepage": "https://github.com/shawnmccarthy/CSC3916_HW3#readme",
   "dependencies": {
-    "auth": "^0.0.9",
-    "auth0-js": "^9.19.0",
-    "bcrypt-nodejs": "^0.0.3",
-    "body-parser": "^1.19.2",
-    "colors": "^1.4.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "express-async-handler": "^1.2.0",
-    "http": "^0.0.1-security",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.9",
-    "node.js": "^0.0.1-security",
-    "passport": "^0.5.2",
+    "mongoose": "^5.13.14",
+    "moongoose": "^0.0.5",
+    "passport": "^0.4.1",
     "passport-http": "^0.3.0",
     "passport-jwt": "^4.0.0",
-    "request-promise": "^4.2.6"
+    "request-promise": "^4.2.6",
+    "universal-ga": "^1.2.0",
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "chai": "^4.3.0",
     "chai-http": "^4.3.0",
-    "mocha": "^8.3.0"
+    "mocha": "^9.2.2"
   }
 }
+
