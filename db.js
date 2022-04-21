@@ -1,18 +1,20 @@
-'use strict;';
 
+'use strict;';
+//Include crypto to generate the movie id
 var crypto = require('crypto');
 module.exports = function () {
     return {
         userList: [],
-
+        /*
+         * Save the user inside the "db".
+         */
         save: function (user) {
             user.id = crypto.randomBytes(20).toString('hex'); // fast enough for our purpose
             this.userList.push(user);
             return 1;
         },
-
         /*
-         Retrieve
+         * Retrieve a movie with a given id or return all the movies if the id is undefined.
          */
         find: function (id) {
             if (id) {
@@ -34,9 +36,8 @@ module.exports = function () {
                 return this.userList;
             }
         },
-
         /*
-         Delete
+         * Delete a movie with the given id.
          */
         remove: function (id) {
             var found = 0;
@@ -50,9 +51,8 @@ module.exports = function () {
             });
             return found;
         },
-
         /*
-         Update
+         * Update a movie with the given id
          */
         update: function (id, user) {
             var userIndex = this.userList.findIndex(function (element) {
