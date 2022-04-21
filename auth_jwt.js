@@ -1,19 +1,24 @@
 
-var passport = require('passport');
-var JwtStrategy = require('passport-jwt').Strategy;
-var ExtractJwt = require('passport-jwt').ExtractJwt;
-var User = require('./Users');
 
-require("dotenv").config() //somehting I was missing that messed up other versions
-var opts = {};
+const passport = require('passport');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const User = require('./Users');
+require("dotenv").config()
+const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
 opts.secretOrKey = process.env.SECRET_KEY;
 
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findById(jwt_payload.id, function (err, user) {
-        if (user) {
+passport.use(new JwtStrategy(opts, function(jwt_payload, done)
+{
+    User.findById(jwt_payload.id, function (err, user)
+    {
+        if (user)
+        {
             done(null, user);
-        } else {
+        }
+        else
+        {
             done(null, false);
         }
     });
