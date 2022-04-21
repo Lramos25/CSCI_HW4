@@ -1,25 +1,51 @@
 
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
+require("dotenv").config()
 
-//mongoose.connect(process.env.DB, { useNewUrlParser: true });
 try
 {
     mongoose.connect( process.env.DB, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
         console.log("connected"));
-}catch (error)
+}
+catch (error)
 {
     console.log("could not connect");
 }
-//mongoose.set('useCreateIndex', true);
+mongoose.set('useCreateIndex', true);
 
 //movies schema
 let MovieSchema = new Schema({
-    title: {type: String, required: true, index: { unique: true}},
-    yearReleased: {type: String, required: true},
-    genre: {type: String, required: true},
-    actors: [{actorName: String, characterName: String}]
+    title: {
+        type: String,
+        trim: true,
+        required: "Title is required",
+
+    },
+    yearReleased: {
+        type: Number,
+        required: "Year Released is required",
+
+    },
+    genre: {
+        type: String,
+        required: true,
+        enum: ["Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Mystery", "Thriller", "Western"]
+    },
+    imageUrl : {
+        type: String,
+        required : false
+    },
+
+    actors:
+        [
+            {ActorName : {type : String, required : true}, CharacterName : {type : String, required :true}},
+            {ActorName : {type : String, required : true}, CharacterName : {type : String, required :true}},
+            {ActorName : {type : String, required : true}, CharacterName : {type : String, required :true}},
+            {ActorName : {type : String, required : true}, CharacterName : {type : String, required :true}}
+        ]
 });
 
 
